@@ -1,7 +1,5 @@
 let secret = process.env.REACT_APP_FAUNADB_KEY;
-//const faunadb = window.faunadb;
-var faunadb = require('faunadb')
-console.log(faunadb);
+var faunadb = require('faunadb');
 const q = faunadb.query;
 
 const client = new faunadb.Client({
@@ -10,7 +8,7 @@ const client = new faunadb.Client({
     scheme: 'https',
   })
 
-;(async () => {
+export const init  = async () => {
     await client.query(
         q.If(
         q.Exists(q.Collection('Guns')),
@@ -18,7 +16,7 @@ const client = new faunadb.Client({
         q.CreateCollection({ name: 'Guns' })
         )
     ).catch((err) => console.log(err))
-})()
+}
 
 export const addGun = async (value) => {  
     await client.query(

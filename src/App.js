@@ -1,8 +1,9 @@
 import './App.css';
-import {addGun} from './data/fauna-queries.js';
+import {addGun, init} from './data/fauna-queries.js';
 
 function addTodo(e) {
   const name = "glock";
+  init();
   addGun("glock");
 }
 
