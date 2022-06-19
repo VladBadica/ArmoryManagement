@@ -1,17 +1,21 @@
 import './App.css';
-import {addGun, init} from './data/fauna-queries.js';
+import React, {useEffect} from 'react';
+import {init} from './data/fauna-queries.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Router_Views from './views';
 
-function addTodo(e) {
-  const name = "glock";
-  init();
-  addGun("glock");
-}
+
 
 function App() {
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
-    <> 
-    <button onClick={addTodo}> Add </button>
-    </>
+    <div className="page">
+      <Router_Views/>
+    </div>
+
   );
 }
 
