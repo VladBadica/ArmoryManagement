@@ -5,19 +5,21 @@ import {getAmmunitions} from '../actions/ammunitionsActions';
 
 const ViewAmmunitions = () => {
     
-    const ammunitions = useSelector((state) => state.storeAmmunitions);
+    const {loading, ammunitions} = useSelector((state) => state.storeAmmunitions);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(ammunitions);
         dispatch(getAmmunitions());
-        console.log(ammunitions);
 
       }, [dispatch]);
 
     return (
         <div>
-            VIEW ALL AMMO
+           <div>VIEW ALL AMMO</div> 
+
+            {ammunitions?.map((ammo) => (
+                ammo.model
+          ))}
         </div>
     );
 
