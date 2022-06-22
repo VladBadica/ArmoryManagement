@@ -1,4 +1,3 @@
-
 let secret = process.env.REACT_APP_FAUNADB_KEY;
 
 var faunadb = require('faunadb');
@@ -31,7 +30,18 @@ export const addGun = async (value) => {
 };
 
 export const getAmmunitionsQuery = async (dispatch) => {
-    return await client.query(
+    var primers =  await client.query(
         q.Call("GetAllPrimers_Sorted", [])
     )
+    var powders =  await client.query(
+      q.Call("GetAllPowders_Sorted", [])
+    )
+    var bullets =  await client.query(
+      q.Call("GetAllBullets_Sorted", [])
+    )
+    return {
+      primers: primers.data,
+      powders: powders.data,
+      bullets: bullets.data
+    };
 };

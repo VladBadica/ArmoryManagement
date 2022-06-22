@@ -11,3 +11,18 @@
   margin-top: 10px;
 }
 
+.ammoContainer{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 50px;
+  margin-right: 50px;
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
+.xd{
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+}
