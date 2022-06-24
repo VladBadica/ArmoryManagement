@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 import Home from './Home';
 import ViewAmmunitions from './ViewAmmunitions';
+import AddAmmunitions from './AddAmmunitions';
 
 const ReactRouterSetup = () => {
     return <Router>
@@ -11,8 +12,12 @@ const ReactRouterSetup = () => {
             <Home/>
         </Route>
 
-        <Route path="/ammunitions">
+        <Route path="/viewAmmunitions">
             <ViewAmmunitions/>
+        </Route>
+
+        <Route path="/addAmmunitions">
+            <AddAmmunitions/>
         </Route>
     </Router>
 };
