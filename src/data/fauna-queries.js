@@ -31,14 +31,15 @@ export const addGun = async (value) => {
 
 export const getAmmunitionsQuery = async () => {
   var primers =  await client.query(
-      q.Call("GetAllPrimers_Sorted", [])
-  )
+    q.Call("GetAllPrimers_Sorted", [])
+  );
   var powders =  await client.query(
     q.Call("GetAllPowders_Sorted", [])
-  )
+  );
   var bullets =  await client.query(
     q.Call("GetAllBullets_Sorted", [])
-  )
+  );
+
   return {
     primers: primers.data,
     powders: powders.data,
@@ -46,20 +47,33 @@ export const getAmmunitionsQuery = async () => {
   };
 };
 
-export const getBulletsMakeQuery = async () => {
+export const getBulletDetailsQuery = async () => {
   var makes =  await client.query(
-      q.Call("GetBulletsMake", [])
-  )
+    q.Call("GetBulletMakes", [])
+  );
   var calibres =  await client.query(
-    q.Call("GetBulletsCalibre", [])
-  )
+    q.Call("GetBulletCalibres", [])
+  );
   var models =  await client.query(
-    q.Call("GetBulletsModel", [])
-  )
+    q.Call("GetBulletModels", [])
+  );
 
   return {
     makes: makes,
     calibres: calibres,
+    models: models
+  };
+};
+
+export const getPrimerDetailsQuery = async () => {
+  var makes =  await client.query(
+    q.Call("GetPrimerMakes", [])
+  );
+  var models =  await client.query(
+    q.Call("GetPrimerModels", [])
+  );
+  return {
+    makes: makes,
     models: models
   };
 };
@@ -79,6 +93,21 @@ export const addBullet = async (bulletData) => {
         bulletData.available, 
         0
       ])
-  ) 
-  
+  )   
+};
+
+export const addPrimer = async (primerData) => {
+  console.log(primerData)
+  await client.query(
+    q.Call("AddPrimer", 
+      [
+        primerData.date_purchased, 
+        primerData.make, 
+        primerData.model, 
+        primerData.price, 
+        primerData.unit_per_box, 
+        primerData.available, 
+        0
+      ])
+  )   
 };
