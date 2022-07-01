@@ -1,10 +1,12 @@
-import React from 'react';
-import {Form, Button} from 'react-bootstrap';
+import React, { useEffect } from 'react';
+import {Form, Button, Alert} from 'react-bootstrap';
 import {useState} from 'react';
 import {addBullet} from '../data/fauna-queries.js';
 
 const AddBullets = ({bullets_details}) =>{
-    
+
+    const [errorMessage, setErrorMessage] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
     const [bulletData, setBulletData] = useState({ 
         date_purchased: "",
         make: "",
@@ -20,9 +22,30 @@ const AddBullets = ({bullets_details}) =>{
 
     var newBulletData = {...bulletData};
 
+    useEffect(() =>{
+        if(bullets_details && bullets_details.makes){
+            newBulletData.make = bullets_details.makes[0];
+            setBulletData(x => ({...newBulletData}));
+        }
+        if(bullets_details && bullets_details.calibres){
+            newBulletData.calibre = bullets_details.calibres[0];
+            setBulletData(x => ({...newBulletData}));
+        }
+        if(bullets_details && bullets_details.models){
+            newBulletData.model = bullets_details.models[0];
+            setBulletData(x => ({...newBulletData}));
+        }
+    }, [bullets_details]);
+
     function handleAddBullet(e){        
         e.preventDefault();
-        addBullet(bulletData);
+        if(!bulletData.date_purchased || bulletData.date_purchased.length <= 0){
+            setErrorMessage("There is no date selected");
+            setShowAlert(true);
+        }
+        else{
+            addBullet(bulletData);
+        }
     }
 
     function handleFormChange(key, isInt, e){     
@@ -30,9 +53,19 @@ const AddBullets = ({bullets_details}) =>{
         newBulletData[key] = isInt ? parseInt(e.target.value): e.target.value;
         setBulletData(bulletData => ({...newBulletData}));
     }
-
+    const BAlert = () => {
+        if(showAlert){
+            return(
+                <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                   <h4>Error: {errorMessage}</h4>
+                </Alert>
+            )
+        }
+        return(<div style={{marginTop: "86px"}}></div>)
+    }
     return(
         <div className="formAddContainer">
+            <BAlert/>
             <h3> Add Bullet</h3>
             <Form>
                 <Form.Group className="mb-3">

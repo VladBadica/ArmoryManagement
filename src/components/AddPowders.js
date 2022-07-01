@@ -1,75 +1,75 @@
 import React, { useEffect } from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
 import {useState} from 'react';
-import {addPrimer} from '../data/fauna-queries.js';
+import {addPowder} from '../data/fauna-queries.js';
 
-const AddPrimers = ({primers_details}) =>{
+const AddPowders = ({powders_details}) =>{
     
     const [errorMessage, setErrorMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
-    const [primerData, setPrimerData] = useState({ 
+    const [powderData, setPowderData] = useState({ 
         date_purchased: "",        
         make: "",
         model: "",
         price: 0,
-        unit_per_box: 0,
-        price_per_unit: 0,
+        grains_per_pot: 0,
+        price_per_grain: 0,
         available: 0,
         used: 0,
-    });
-
-    var newPrimerData = {...primerData};
+    });        
+    
+    var newPowderData = {...powderData};
 
     useEffect(() =>{
-        if(primers_details && primers_details.makes){
-            newPrimerData.make = primers_details.makes[0];
-            setPrimerData(x => ({...newPrimerData}));
+        if(powders_details && powders_details.makes){
+            newPowderData.make = powders_details.makes[0];
+            setPowderData(x => ({...newPowderData}));
         }
-        if(primers_details && primers_details.models){
-            newPrimerData.model = primers_details.models[0];
-            setPrimerData(x => ({...newPrimerData}));
+        if(powders_details && powders_details.models){
+            newPowderData.model = powders_details.models[0];
+            setPowderData(x => ({...newPowderData}));
         }
-    }, [primers_details]);
+    }, [powders_details]);
 
-    function handleAddPrimer(e){        
+    function handleAddPowder(e){        
         e.preventDefault();
-        if(!primerData.date_purchased || primerData.date_purchased.length <= 0){
-            setErrorMessage("There is no date selected");
+        if(!powderData.date_purchased || powderData.date_purchased.length <= 0){
             setShowAlert(true);
+           setErrorMessage("There is no date selected");
         }
         else{
-            addPrimer(primerData);
+            addPowder(powderData);
         }
     }
 
     function handleFormChange(key, isInt, e){     
-        newPrimerData = {...primerData};  
-        newPrimerData[key] = isInt ? parseInt(e.target.value): e.target.value;
-        setPrimerData(primerData => ({...newPrimerData}));
+        newPowderData = {...powderData};  
+        newPowderData[key] = isInt ? parseInt(e.target.value): e.target.value;
+        setPowderData(powderData => ({...newPowderData}));
     }
 
     const BAlert = () => {
         if(showAlert){
             return(
                 <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                    <h4>Error: {errorMessage}</h4>
+                   <h4>Error: {errorMessage}</h4>
                 </Alert>
             )
         }
-
         return(<div style={{marginTop: "86px"}}></div>)
     }
 
     return(
         <div className="formAddContainer">
             <BAlert/>
-            <h3> Add Primer</h3>
+           
+            <h3> Add Powder</h3>
             <Form>
                 <Form.Group className="mb-3">
                     <Form.Label>Date puchased</Form.Label>
                     <Form.Control 
                         required 
-                        value={primerData.date_purchased} 
+                        value={powderData.date_purchased} 
                         onChange={(e) => handleFormChange("date_purchased", false, e)}
                         type="text" 
                         placeholder="Enter the date of the purchase" />
@@ -78,10 +78,10 @@ const AddPrimers = ({primers_details}) =>{
                 <Form.Group className="mb-3">
                     <Form.Label>Make</Form.Label>
                     <Form.Select 
-                        value={primerData.make}
+                        value={powderData.make}
                         onChange={(e) => handleFormChange("make", false, e)}
                         >
-                        {primers_details?.makes?.map((make) => 
+                        {powders_details?.makes?.map((make) => 
                             (<option key={make}>
                                 {make}
                             </option>)
@@ -92,10 +92,10 @@ const AddPrimers = ({primers_details}) =>{
                 <Form.Group className="mb-3">
                     <Form.Label>Model</Form.Label>
                     <Form.Select 
-                        value={primerData.model}                        
+                        value={powderData.model}                        
                         onChange={(e) => handleFormChange("model", false, e)}
                     >
-                        {primers_details?.models?.map((model) => 
+                        {powders_details?.models?.map((model) => 
                             (<option key={model}>
                                 {model}
                             </option>)
@@ -107,33 +107,33 @@ const AddPrimers = ({primers_details}) =>{
                     <Form.Label>Price</Form.Label>
                     <Form.Control 
                         required 
-                        value={primerData.price}   
+                        value={powderData.price}   
                         onChange={(e) => handleFormChange("price", true, e)}
                         type="number" 
                         placeholder="Enter price value" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                    <Form.Label>Unit per box</Form.Label>
+                    <Form.Label>Grains per pot</Form.Label>
                     <Form.Control required 
-                        value={primerData.unit_per_box}  
-                        onChange={(e) => handleFormChange("unit_per_box", true, e)}
+                        value={powderData.grains_per_pot}  
+                        onChange={(e) => handleFormChange("grains_per_pot", true, e)}
                         type="number" 
-                        placeholder="How many units per box" />
+                        placeholder="How grains per pot" />
                 </Form.Group>
 
                 <Form.Group className="mb-3">
                     <Form.Label>Number Available</Form.Label>
                     <Form.Control 
                         required 
-                        value={primerData.available} 
+                        value={powderData.available} 
                         onChange={(e) => handleFormChange("available", true, e)}
                         type="number" 
                         placeholder="How many available" />
                 </Form.Group>
 
 
-                <Button variant="primary" type="submit" onClick={(e) => handleAddPrimer(e)}>
+                <Button variant="primary" type="submit" onClick={(e) => handleAddPowder(e)}>
                     Submit
                 </Button>
             </Form>
@@ -141,4 +141,4 @@ const AddPrimers = ({primers_details}) =>{
     );
 }
 
-export default AddPrimers;
+export default AddPowders;

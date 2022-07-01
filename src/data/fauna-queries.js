@@ -78,35 +78,67 @@ export const getPrimerDetailsQuery = async () => {
   };
 };
 
-export const addBullet = async (bulletData) => {
-  console.log(bulletData)
+export const getPowderDetailsQuery = async () => {
+  var makes =  await client.query(
+    q.Call("GetPowderMakes", [])
+  );
+  var models =  await client.query(
+    q.Call("GetPowderModels", [])
+  );
+  return {
+    makes: makes,
+    models: models
+  };
+};
+
+export const addBullet = async (data) => {
+  console.log(data);
   await client.query(
     q.Call("AddBullet", 
       [
-        bulletData.date_purchased, 
-        bulletData.make, 
-        bulletData.calibre, 
-        bulletData.model, 
-        bulletData.grain, 
-        bulletData.price, 
-        bulletData.unit_per_box, 
-        bulletData.available, 
+        data.date_purchased, 
+        data.make, 
+        data.calibre, 
+        data.model, 
+        data.grain, 
+        data.price, 
+        data.unit_per_box, 
+        data.price / data.unit_per_box,
+        data.available, 
         0
       ])
   )   
 };
 
-export const addPrimer = async (primerData) => {
-  console.log(primerData)
+export const addPrimer = async (data) => {
+  console.log(data);
   await client.query(
     q.Call("AddPrimer", 
       [
-        primerData.date_purchased, 
-        primerData.make, 
-        primerData.model, 
-        primerData.price, 
-        primerData.unit_per_box, 
-        primerData.available, 
+        data.date_purchased, 
+        data.make, 
+        data.model, 
+        data.price, 
+        data.unit_per_box, 
+        data.price_per_unit,
+        data.available, 
+        0
+      ])
+  )   
+};
+
+export const addPowder = async (data) => {
+  console.log(data);
+  await client.query(
+    q.Call("AddPowder", 
+      [
+        data.date_purchased, 
+        data.make, 
+        data.model, 
+        data.price, 
+        data.grains_per_pot, 
+        data.price_per_grain,
+        data.available, 
         0
       ])
   )   
