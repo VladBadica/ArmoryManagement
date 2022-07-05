@@ -7,6 +7,7 @@ const AddPowders = ({powders_details}) =>{
     
     const [errorMessage, setErrorMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false);
     const [powderData, setPowderData] = useState({ 
         date_purchased: "",        
         make: "",
@@ -34,12 +35,20 @@ const AddPowders = ({powders_details}) =>{
     function handleAddPowder(e){        
         e.preventDefault();
         if(!powderData.date_purchased || powderData.date_purchased.length <= 0){
+            setShowAlertSuccess(false);
             setShowAlert(true);
-           setErrorMessage("There is no date selected");
+            setErrorMessage("There is no date selected");
         }
-        else{
-            addPowder(powderData);
-        }
+        else{ 
+            addPowder(powderData).then((r) => {
+            setShowAlertSuccess(true);
+            setShowAlert(false);      
+           }).catch((err) => {
+            setErrorMessage(err);
+            setShowAlert(true);
+            setShowAlertSuccess(false);
+           });
+        }    
     }
 
     function handleFormChange(key, isInt, e){     
@@ -56,7 +65,16 @@ const AddPowders = ({powders_details}) =>{
                 </Alert>
             )
         }
-        return(<div style={{marginTop: "86px"}}></div>)
+        if(showAlertSuccess){
+            return(
+                <Alert variant="success" onClose={() => setShowAlertSuccess(false)} dismissible>
+                   <h4>Successfully added!</h4>
+                </Alert>
+            )
+        }
+        if(!showAlertSuccess && !showAlert){
+            return(<div style={{marginTop: "86px"}}></div>)
+        }
     }
 
     return(

@@ -7,6 +7,7 @@ const AddPrimers = ({primers_details}) =>{
     
     const [errorMessage, setErrorMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false);
     const [primerData, setPrimerData] = useState({ 
         date_purchased: "",        
         make: "",
@@ -36,10 +37,18 @@ const AddPrimers = ({primers_details}) =>{
         if(!primerData.date_purchased || primerData.date_purchased.length <= 0){
             setErrorMessage("There is no date selected");
             setShowAlert(true);
+            setShowAlertSuccess(false);
         }
-        else{
-            addPrimer(primerData);
-        }
+        else{ 
+            addPrimer(primerData).then((r) => {
+            setShowAlertSuccess(true);
+            setShowAlert(false);      
+           }).catch((err) => {
+            setErrorMessage(err);
+            setShowAlert(true);
+            setShowAlertSuccess(false);
+           });
+        }       
     }
 
     function handleFormChange(key, isInt, e){     
@@ -56,8 +65,16 @@ const AddPrimers = ({primers_details}) =>{
                 </Alert>
             )
         }
-
-        return(<div style={{marginTop: "86px"}}></div>)
+        if(showAlertSuccess){
+            return(
+                <Alert variant="success" onClose={() => setShowAlertSuccess(false)} dismissible>
+                   <h4>Successfully added!</h4>
+                </Alert>
+            )
+        }
+        if(!showAlertSuccess && !showAlert){
+            return(<div style={{marginTop: "86px"}}></div>)
+        }
     }
 
     return(

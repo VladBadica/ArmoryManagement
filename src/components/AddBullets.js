@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
 import {useState} from 'react';
-import {addBullet} from '../data/fauna-queries.js';
+import {addBullet} from '../data/fauna-queries';
 
 const AddBullets = ({bullets_details}) =>{
 
     const [errorMessage, setErrorMessage] = useState("");
     const [showAlert, setShowAlert] = useState(false);
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false);
     const [bulletData, setBulletData] = useState({ 
         date_purchased: "",
         make: "",
@@ -37,14 +38,22 @@ const AddBullets = ({bullets_details}) =>{
         }
     }, [bullets_details]);
 
-    function handleAddBullet(e){        
+    async function handleAddBullet(e){        
         e.preventDefault();
         if(!bulletData.date_purchased || bulletData.date_purchased.length <= 0){
             setErrorMessage("There is no date selected");
-            setShowAlert(true);
+            setShowAlert(true);            
+            setShowAlertSuccess(false);
         }
         else{
-            addBullet(bulletData);
+            addBullet(bulletData).then((r) => {
+            setShowAlertSuccess(true);
+            setShowAlert(false);      
+           }).catch((err) => {
+            setErrorMessage(err);
+            setShowAlert(true);
+            setShowAlertSuccess(false);
+           });
         }
     }
 
@@ -53,6 +62,7 @@ const AddBullets = ({bullets_details}) =>{
         newBulletData[key] = isInt ? parseInt(e.target.value): e.target.value;
         setBulletData(bulletData => ({...newBulletData}));
     }
+
     const BAlert = () => {
         if(showAlert){
             return(
@@ -61,11 +71,22 @@ const AddBullets = ({bullets_details}) =>{
                 </Alert>
             )
         }
-        return(<div style={{marginTop: "86px"}}></div>)
-    }
+        if(showAlertSuccess){
+            return(
+                <Alert variant="success" onClose={() => setShowAlertSuccess(false)} dismissible>
+                   <h4>Successfully added!</h4>
+                </Alert>
+            )
+        }
+        if(!showAlertSuccess && !showAlert){
+            return(<div style={{marginTop: "86px"}}></div>)
+        }
+    }  
+
     return(
         <div className="formAddContainer">
             <BAlert/>
+            
             <h3> Add Bullet</h3>
             <Form>
                 <Form.Group className="mb-3">

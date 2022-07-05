@@ -5,7 +5,7 @@ import {
     POWDERS_DETAILS,
 } from '../constants';
 
-import {getAmmunitionsQuery, getBulletDetailsQuery, getPrimerDetailsQuery, getPowderDetailsQuery} from '../data/fauna-queries';
+import {getAmmunitionsQuery, getBulletDetailsQuery, getPrimerDetailsQuery, getPowderDetailsQuery, addBulletQuery} from '../data/fauna-queries';
 
 export const getAmmunitions = () => async (dispatch) =>{
     try{

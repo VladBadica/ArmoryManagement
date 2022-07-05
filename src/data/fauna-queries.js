@@ -92,8 +92,7 @@ export const getPowderDetailsQuery = async () => {
 };
 
 export const addBullet = async (data) => {
-  console.log(data);
-  await client.query(
+  return client.query(
     q.Call("AddBullet", 
       [
         data.date_purchased, 
@@ -111,8 +110,7 @@ export const addBullet = async (data) => {
 };
 
 export const addPrimer = async (data) => {
-  console.log(data);
-  await client.query(
+  return client.query(
     q.Call("AddPrimer", 
       [
         data.date_purchased, 
@@ -128,8 +126,7 @@ export const addPrimer = async (data) => {
 };
 
 export const addPowder = async (data) => {
-  console.log(data);
-  await client.query(
+  return client.query(
     q.Call("AddPowder", 
       [
         data.date_purchased, 
