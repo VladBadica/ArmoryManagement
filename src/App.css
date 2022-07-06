@@ -1,9 +1,17 @@
+@media(min-width: 1800px){
+  .container{
+    max-width: 1800px !important
+  }
+}
+html {
+  overflow-y: scroll;
+}
 .text_center{
   text-align: center;
 }
 
 .page{
-  padding-top: 3em;
+  padding-top: 5em;
   text-align: center;
 }
 
@@ -27,4 +35,8 @@
   display: inline-block;
   max-width: 70%;
   min-width: 40%;
+}
+
+body, .navbar{
+  padding-right: 0px !important;
 }

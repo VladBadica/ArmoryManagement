@@ -19,16 +19,6 @@ export const init  = async () => {
     ).catch((err) => console.log(err));
 };
 
-export const addGun = async (value) => {  
-  await client.query(
-    q.Create(
-      q.Collection('Guns'),
-      { data: { name: value } }
-    )
-  )
-  .catch((err) => console.log(err));  
-};
-
 export const getAmmunitionsQuery = async () => {
   var primers =  await client.query(
     q.Call("GetAllPrimers_Sorted", [])

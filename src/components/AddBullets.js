@@ -16,7 +16,6 @@ const AddBullets = ({bullets_details}) =>{
         grain: 0,
         price: 0,
         unit_per_box: 0,
-        price_per_unit: 0,
         available: 0,
         used: 0,
     });
