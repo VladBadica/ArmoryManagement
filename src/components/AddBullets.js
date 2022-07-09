@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Form, Button, Alert} from 'react-bootstrap';
-import {useState} from 'react';
 import {addBullet} from '../data/fauna-queries';
 
 const AddBullets = ({bullets_details}) =>{

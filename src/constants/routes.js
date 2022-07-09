@@ -1,4 +1,4 @@
-const data ={
+const data = {
     AddAmmunitionsPage: "/addAmmunitions",
     HomePage: "/",
     ReloadsPage: "/reloads",

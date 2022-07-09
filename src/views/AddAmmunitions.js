@@ -34,7 +34,7 @@ const AddAmmunitions = () => {
         }
     }
     return (
-        <div >
+        <div>
         <div onChange={onChangeValue}>
             <input type="radio" value="bullets" name="ammo" defaultChecked={selectedOption === "bullets"}/> Add Bullets
             <input style={{marginLeft: "10px"}} type="radio" value="primers" name="ammo" /> Add Primers
