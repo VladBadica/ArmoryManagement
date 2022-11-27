@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import routes from '../constants/routes';
-import RequestManager from '../services/RequestManager';
+import BulletService from '../services/bulletService.js';
 
 const Home = () => {
     const [data, setData] = useState("test");
 
     useEffect(() => {
-        RequestManager.Request().then((response) => {
+        BulletService.GetAllBullets().then((response) => {
             console.log(response);
         })
     }, []);

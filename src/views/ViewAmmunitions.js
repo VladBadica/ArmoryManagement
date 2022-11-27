@@ -1,41 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import BulletsTable from '../components/BulletsTable';
-import PrimersTable from '../components/PrimersTable';
-import PowdersTable from '../components/PowdersTable';
+import BulletService from '../services/bulletService';
 
 const ViewAmmunitions = () => {
+  var [bullets, setBullets] = useState('');
 
-  const { ammunitions } = useState({});
-  var [primersHeaders, setPrimersHeaders] = useState([]);
-  var [bulletsHeaders, setBulletsHeaders] = useState([]);
-  var [powdersHeaders, setPowdersHeaders] = useState([]);
+  const getBullets = async () => {
+    const response = await BulletService.GetAllBullets();
+
+    if (response && response.data) {
+      setBullets(response.data);
+    }
+  }
 
   useEffect(() => {
-    var headers;
-
-    if (ammunitions && ammunitions?.primers?.length > 0) {
-      headers = Object.keys(ammunitions.primers[0].data);
-      setPrimersHeaders(headers);
+    if (!bullets) {
+      getBullets();
     }
+  }, [bullets]);
 
-    if (ammunitions && ammunitions?.bullets?.length > 0) {
-      headers = Object.keys(ammunitions.bullets[0].data);
-      setBulletsHeaders(headers);
-    }
-
-    if (ammunitions && ammunitions?.powders?.length > 0) {
-      headers = Object.keys(ammunitions.powders[0].data);
-      setPowdersHeaders(headers);
-    }
-    console.log(ammunitions)
-  }, [ammunitions]);
+  const bulletsComponent = useMemo(() =>
+    <BulletsTable bullets={bullets} />
+    , [bullets]);
 
   return (
-    <div>
-      <PrimersTable primersHeaders={primersHeaders} primers={ammunitions?.primers} />
-      <BulletsTable bulletsHeaders={bulletsHeaders} bullets={ammunitions?.bullets} />
-      <PowdersTable powdersHeaders={powdersHeaders} powders={ammunitions?.powders} />
-    </div>
+      bulletsComponent
   );
 
 };
