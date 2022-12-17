@@ -5,7 +5,6 @@ import routes from '../constants/routes';
 import BulletService from '../services/bulletService.js';
 
 const Home = () => {
-    const [data, setData] = useState("test");
 
     useEffect(() => {
         BulletService.GetAllBullets().then((response) => {
@@ -16,9 +15,8 @@ const Home = () => {
     return (
         <div>
             <h1 className="mb-5"> Armory Manager</h1>
-            <Link to={routes.ViewAmmunitionsPage}> <Button variant="secondary">View Ammunitions </Button> </Link>
-            <Link to={routes.AddAmmunitionsPage}> <Button variant="secondary">Add Ammunitions </Button> </Link>
-            <p>{data}</p>
+            <Link to={routes.ViewAmmunitions}> <Button variant="secondary">View Ammunitions </Button> </Link>
+            <Link to={routes.AddAmmunitions}> <Button variant="secondary">Add Ammunitions </Button> </Link>
         </div>
     )
 };

@@ -1,6 +1,6 @@
 {
-  "name": "ammo-manager",
-  "version": "0.1.0",
+  "name": "armory-manager",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
@@ -10,18 +10,12 @@
     "bootstrap": "^5.1.3",
     "dotenv": "^16.0.3",
     "express-async-handler": "^1.2.0",
-    "faunadb": "^4.6.0",
     "node-sass": "^7.0.3",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
-    "react-dom": "^18.1.0",
-    "react-redux": "^8.0.2",
-    "react-router-dom": "^5.3.3",
-    "react-scripts": "5.0.1",
-    "redux": "^4.2.0",
-    "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.4.1",
-    "web-vitals": "^2.1.4"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.5",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

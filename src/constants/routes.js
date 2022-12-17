@@ -1,8 +1,10 @@
 const data = {
-    AddAmmunitionsPage: "/addAmmunitions",
-    HomePage: "/",
-    ReloadsPage: "/reloads",
-    ViewAmmunitionsPage: "/viewAmmunitions",
+    AddAmmunitions: "addAmmunitions",
+    Home: "/",
+    Login: "auth",
+    Reloads: "reloads",
+    ViewAmmunitions: "viewAmmunitions",
+    NoMatch: "*"
 }
 
 export default data;

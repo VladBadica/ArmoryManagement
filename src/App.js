@@ -1,7 +1,8 @@
 import './App.scss';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import RouterViews from './views';
+import RouterViews from './views/RouterViews.js';
+import { BrowserRouter as Router } from "react-router-dom";
 import NavbarComponent from './components/NavbarComponent';
 
 function App() {
@@ -9,11 +10,12 @@ function App() {
     <>
       <NavbarComponent />
       <div className="page">
-        <RouterViews />
+        <Router>
+          <RouterViews />
+        </Router>
       </div>
     </>
-
-  );
+  )
 }
 
 export default App;

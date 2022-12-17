@@ -8,11 +8,13 @@ const AddAmmunitions = () => {
     function onChangeValue(e) {
         setSelectedOption(e.target.value);
     }
+
     const AddPage = () => {
         if (selectedOption === "bullets") {
             return (<AddBullets />);
         }
     }
+
     return (
         <div>
             <div onChange={onChangeValue}>

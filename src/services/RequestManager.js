@@ -15,10 +15,12 @@ const Delete = async ({ url, body }) => {
 }
 
 const fetchData = async ({ url, method, body }) => {
-    console.log(url)
     return await fetch(
         url, {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkRvblZsYWRzdGVyIiwibmFtZWlkIjoiMiIsIm5iZiI6MTY2OTg0MzAzMCwiZXhwIjoxNzAxMzc5MDMwLCJpYXQiOjE2Njk4NDMwMzB9.W7eJqt92S8_RZ0EdAvdYjVBmS5LRBoeN2UzurJrJvCY'
+        },
         method,
         body: JSON.stringify(body)
     })
@@ -38,6 +40,15 @@ const fetchData = async ({ url, method, body }) => {
                     error: { errorMessage: "Could not establish connection to the requested service." }
                 }
 
+            }
+
+            if (response.status === 401) {
+                return {
+                    error: {
+                        errorMessage: "Unauthorized access.",
+                    },
+                    status: response.status
+                };
             }
 
             if (response.status === 404) {
@@ -77,6 +88,10 @@ const fetchData = async ({ url, method, body }) => {
 
             return { status: response.status }
         });
+}
+
+const GetRequest = async ({ url }) => {
+    return await fetchData({ method: 'GET', url });
 }
 
 const RequestManager = {
