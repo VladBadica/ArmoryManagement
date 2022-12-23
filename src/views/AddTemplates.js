@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AddCasingTemplate from '../components/CasingTemplate/AddCasingTemplate';
+import AddCasingTemplate from '../components/Templates/AddCasingTemplate';
 
 const AddTemplates = () => {
     const [selectedOption, setSelectedOption] = useState("casings");
