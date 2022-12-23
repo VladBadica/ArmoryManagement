@@ -1,5 +1,5 @@
 const data = {
-    AddAmmunitions: "addAmmunitions",
+    AddTemplates: "addTemplates",
     Home: "/",
     Login: "auth",
     Reloads: "reloads",

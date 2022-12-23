@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import AddBullets from '../components/AddBullets';
+import AddCasingTemplate from '../components/CasingTemplate/AddCasingTemplate';
 
-const AddAmmunitions = () => {
-    const [selectedOption, setSelectedOption] = useState("bullets");
+const AddTemplates = () => {
+    const [selectedOption, setSelectedOption] = useState("casings");
 
 
     function onChangeValue(e) {
@@ -10,15 +10,15 @@ const AddAmmunitions = () => {
     }
 
     const AddPage = () => {
-        if (selectedOption === "bullets") {
-            return (<AddBullets />);
+        if (selectedOption === "casings") {
+            return (<AddCasingTemplate />);
         }
     }
 
     return (
         <div>
-            <div onChange={onChangeValue}>
-                <input type="radio" value="bullets" name="ammo" defaultChecked={selectedOption === "bullets"} /> Add Bullets
+            <div onChange={onChangeValue} className="text-center">
+                <input type="radio" value="casings" name="ammo" defaultChecked={selectedOption === "casings"} /> Add Casings
                 <input style={{ marginLeft: "10px" }} type="radio" value="primers" name="ammo" /> Add Primers
                 <input style={{ marginLeft: "10px" }} type="radio" value="powders" name="ammo" /> Add Powders
             </div>
@@ -27,4 +27,4 @@ const AddAmmunitions = () => {
     );
 }
 
-export default AddAmmunitions;
+export default AddTemplates;

@@ -1,19 +1,18 @@
-@media(min-width: 1800px){
-  .container{
+@media(min-width: 1800px) {
+  .container {
     max-width: 1800px !important
   }
 }
 
-.page{
+.page {
   padding-top: 5em;
-  text-align: center;
 }
 
-.btn{
+.btn {
   margin-top: 10px;
 }
 
-.ammoContainer{
+.ammoContainer {
   margin-top: 30px;
   margin-bottom: 30px;
   margin-left: 50px;
@@ -21,7 +20,7 @@
   overflow-y: scroll;
   max-height: 300px;
 
-  .table>head{
+  .table>head {
     position: sticky;
   }
 

@@ -20,8 +20,7 @@ const NavbarComponent = () => {
                 <Offcanvas.Body>
                     <Nav className="justify-content-end flex-grow-1 pe-3">
                         <Nav.Link href={routes.Home}>Home</Nav.Link>
-                        <Nav.Link href={routes.ViewAmmunitions}>View Ammunitions</Nav.Link>
-                        <Nav.Link href={routes.AddAmmunitions}>Add Ammunitions</Nav.Link>
+                        <Nav.Link href={routes.AddTemplates}>Add Templates</Nav.Link>
                         <Nav.Link href={routes.Reloads}>Reloads</Nav.Link>
                     </Nav>
 
