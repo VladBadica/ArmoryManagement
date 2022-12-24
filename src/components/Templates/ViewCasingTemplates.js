@@ -4,7 +4,7 @@ import { Button, Accordion, Card } from 'react-bootstrap';
 import CasingTemplateService from '../../services/casingTemplateService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const AddCasingTemplate = () => {
+const ViewCasingTemplates = () => {
     const [showDeleteCasingModal, setShowDeleteCasingModal] = useState(false);
     const [selectedCasingForDelete, setSelectedCasingForDelete] = useState(null);
     const [casingTemplates, setCasingTemplates] = useState([]);
@@ -88,4 +88,4 @@ const AddCasingTemplate = () => {
     );
 }
 
-export default AddCasingTemplate;
+export default ViewCasingTemplates;

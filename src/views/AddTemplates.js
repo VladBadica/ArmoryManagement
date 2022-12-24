@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import AddCasingTemplate from '../components/Templates/AddCasingTemplate';
+import AddPowderTemplate from '../components/Templates/AddPowderTemplate';
+import AddPrimerTemplate from '../components/Templates/AddPrimerTemplate';
 
 const AddTemplates = () => {
     const [selectedOption, setSelectedOption] = useState("casings");
@@ -10,17 +12,23 @@ const AddTemplates = () => {
     }
 
     const AddPage = () => {
-        if (selectedOption === "casings") {
+        if (selectedOption === "casing") {
             return (<AddCasingTemplate />);
+        }
+        if (selectedOption === "powder") {
+            return (<AddPowderTemplate />);
+        }
+        if (selectedOption === "primer") {
+            return (<AddPrimerTemplate />);
         }
     }
 
     return (
         <div>
             <div onChange={onChangeValue} className="text-center">
-                <input type="radio" value="casings" name="ammo" defaultChecked={selectedOption === "casings"} /> Add Casings
-                <input style={{ marginLeft: "10px" }} type="radio" value="primers" name="ammo" /> Add Primers
-                <input style={{ marginLeft: "10px" }} type="radio" value="powders" name="ammo" /> Add Powders
+                <input type="radio" value="casing" name="ammo" defaultChecked={selectedOption === "casing"} /> Add Casing
+                <input style={{ marginLeft: "10px" }} type="radio" value="primer" name="ammo" /> Add Primer
+                <input style={{ marginLeft: "10px" }} type="radio" value="powder" name="ammo" /> Add Powder
             </div>
             <AddPage />
         </div>
