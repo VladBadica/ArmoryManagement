@@ -1,14 +1,14 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import PowderTemplateService from '../../services/powderTemplateService.js';
-import ViewPowderTemplates from './ViewPowderTemplates';
+import PowderService from '../../services/powderService.js';
+import ViewPowders from './ViewPowders';
 
-const AddPowderTemplate = () => {
+const AddPowder = () => {
     const handleAddPowder = async (e) => {
         var formData = new FormData(e.target);
         var powder = Object.fromEntries(formData.entries());
 
-        await PowderTemplateService.CreatePowderTemplate({ powder });
+        await PowderService.CreatePowder({ powder });
     }
 
     return (
@@ -16,14 +16,14 @@ const AddPowderTemplate = () => {
             <div className="col-1">
             </div>
             <div className="col-5">
-                <ViewPowderTemplates></ViewPowderTemplates>
+                <ViewPowders></ViewPowders>
             </div>
 
             <div className="col-1">
             </div>
 
             <div className="col-4">
-                <h3 className="mb-3"> Add Powder Template</h3>
+                <h3 className="mb-3"> Add Powder </h3>
                 <Form onSubmit={(e) => handleAddPowder(e)}>
                     <Form.Group className="mb-1">
                         <Form.Label>Make</Form.Label>
@@ -35,6 +35,21 @@ const AddPowderTemplate = () => {
                         <Form.Control required type="string" name="model" placeholder="Enter model" />
                     </Form.Group>
 
+                    <Form.Group className="mb-1">
+                        <Form.Label>Date Purchased</Form.Label>
+                        <Form.Control required type="string" name="datePurchased" placeholder="Enter date purchased" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Initial Count</Form.Label>
+                        <Form.Control required type="number" name="initialCount" defaultValue="0" placeholder="Enter initial count" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control required type="number" name="price" defaultValue="0" placeholder="Enter the price" />
+                    </Form.Group>
+
                     <Button variant="primary" type="submit" >
                         Submit
                     </Button>
@@ -44,4 +59,4 @@ const AddPowderTemplate = () => {
     );
 }
 
-export default AddPowderTemplate;
+export default AddPowder;

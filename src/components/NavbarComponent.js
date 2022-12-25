@@ -21,6 +21,7 @@ const NavbarComponent = () => {
                     <Nav className="justify-content-end flex-grow-1 pe-3">
                         <Nav.Link href={routes.Home}>Home</Nav.Link>
                         <Nav.Link href={routes.AddTemplates}>Add Templates</Nav.Link>
+                        <Nav.Link href={routes.AddMaterials}>Add Materials</Nav.Link>
                         <Nav.Link href={routes.Reloads}>Reloads</Nav.Link>
                     </Nav>
 

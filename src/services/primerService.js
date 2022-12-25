@@ -1,43 +1,43 @@
 import RequestManager from "./RequestManager";
 
-const GetAllCasings = async () => {
+const GetAllPrimers = async () => {
     return RequestManager.Get({
-        url: `${process.env.REACT_APP_SERVER_URL}/api/casing`
+        url: `${process.env.REACT_APP_SERVER_URL}/api/primerPurchase`
     });
 }
 
-const GetCasing = async ({ id }) => {
+const GetPrimer = async ({ id }) => {
     return RequestManager.Get({
-        url: `${process.env.REACT_APP_SERVER_URL}/api/casing/${id}`
+        url: `${process.env.REACT_APP_SERVER_URL}/api/primerPurchase/${id}`
     });
 }
 
-const CreateCasing = async ({ casing }) => {
+const CreatePrimer = async ({ primer }) => {
     return RequestManager.Post({
-        url: `${process.env.REACT_APP_SERVER_URL}/api/casing`,
-        body: casing
+        url: `${process.env.REACT_APP_SERVER_URL}/api/primerPurchase`,
+        body: primer
     });
 }
 
-const UpdateCasing = async ({ casing }) => {
+const UpdatePrimer = async ({ primer }) => {
     return RequestManager.Put({
-        url: `${process.env.REACT_APP_SERVER_URL}/api/casing`,
-        body: casing
+        url: `${process.env.REACT_APP_SERVER_URL}/api/primerPurchase`,
+        body: primer
     });
 }
 
-const DeleteCasing = async ({ id }) => {
+const DeletePrimer = async ({ id }) => {
     return RequestManager.Delete({
-        url: `${process.env.REACT_APP_SERVER_URL}/api/casing/${id}`
+        url: `${process.env.REACT_APP_SERVER_URL}/api/primerPurchase/${id}`
     });
 }
 
-const CasingService = {
-    GetAllCasings,
-    GetCasing,
-    CreateCasing,
-    UpdateCasing,
-    DeleteCasing
+const PrimerService = {
+    GetAllPrimers,
+    GetPrimer,
+    CreatePrimer,
+    UpdatePrimer,
+    DeletePrimer
 }
 
-export default CasingService;
+export default PrimerService;

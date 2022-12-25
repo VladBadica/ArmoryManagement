@@ -8,6 +8,7 @@ const Home = () => {
         <div className="text-center">
             <h1 className="mb-5"> Armory Manager</h1>
             <Link to={routes.AddTemplates}> <Button variant="secondary">Add Templates </Button> </Link>
+            <Link to={routes.AddMaterials}> <Button variant="secondary">Add Materials </Button> </Link>
         </div>
     )
 };

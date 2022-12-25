@@ -1,15 +1,15 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import CasingTemplateService from '../../services/casingTemplateService.js';
-import ViewCasingTemplates from './ViewCasingTemplates';
+import CasingService from '../../services/casingService.js';
+import ViewCasings from './ViewCasings';
 
-const AddCasingTemplate = () => {
+const AddCasing = () => {
 
     const handleAddCasing = async (e) => {
         var formData = new FormData(e.target);
         var casing = Object.fromEntries(formData.entries());
 
-        await CasingTemplateService.CreateCasingTemplate({ casing });
+        await CasingService.CreateCasing({ casing });
     }
 
     return (
@@ -17,16 +17,16 @@ const AddCasingTemplate = () => {
             <div className="col-1">
             </div>
             <div className="col-5">
-                <ViewCasingTemplates></ViewCasingTemplates>
+                <ViewCasings></ViewCasings>
             </div>
 
             <div className="col-1">
             </div>
 
             <div className="col-4">
-                <h3 className="mb-3"> Add Casing Template</h3>
+                <h3 className="mb-3"> Add Casing </h3>
                 <Form onSubmit={(e) => handleAddCasing(e)}>
-                    <Form.Group className="mb-3">
+                    <Form.Group className="mb-1">
                         <Form.Label>Make</Form.Label>
                         <Form.Control required type="string" name="make" placeholder="Enter make" />
                     </Form.Group>
@@ -46,6 +46,20 @@ const AddCasingTemplate = () => {
                         <Form.Control required type="number" name="grain" defaultValue="0" placeholder="Enter grain value" />
                     </Form.Group>
 
+                    <Form.Group className="mb-1">
+                        <Form.Label>Date Purchased</Form.Label>
+                        <Form.Control required type="string" name="datePurchased" placeholder="Enter date purchased" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Initial Count</Form.Label>
+                        <Form.Control required type="number" name="initialCount" defaultValue="0" placeholder="Enter initial count" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control required type="number" name="price" defaultValue="0" placeholder="Enter the price" />
+                    </Form.Group>
                     <Button variant="primary" type="submit" >
                         Submit
                     </Button>
@@ -55,4 +69,4 @@ const AddCasingTemplate = () => {
     );
 }
 
-export default AddCasingTemplate;
+export default AddCasing;

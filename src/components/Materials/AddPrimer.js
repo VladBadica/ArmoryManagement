@@ -1,14 +1,14 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
-import PrimerTemplateService from '../../services/primerTemplateService.js';
-import ViewPrimerTemplates from './ViewPrimerTemplates';
+import PrimerService from '../../services/primerService.js';
+import ViewPrimers from './ViewPrimers';
 
-const AddPrimerTemplate = () => {
+const AddPrimer = () => {
     const handleAddPrimer = async (e) => {
         var formData = new FormData(e.target);
         var primer = Object.fromEntries(formData.entries());
 
-        await PrimerTemplateService.CreatePrimerTemplate({ primer });
+        await PrimerService.CreatePrimer({ primer });
     }
 
     return (
@@ -16,14 +16,14 @@ const AddPrimerTemplate = () => {
             <div className="col-1">
             </div>
             <div className="col-5">
-                <ViewPrimerTemplates></ViewPrimerTemplates>
+                <ViewPrimers></ViewPrimers>
             </div>
 
             <div className="col-1">
             </div>
 
             <div className="col-4">
-                <h3 className="mb-3"> Add Primer Template</h3>
+                <h3 className="mb-3"> Add Primer </h3>
                 <Form onSubmit={(e) => handleAddPrimer(e)}>
                     <Form.Group className="mb-1">
                         <Form.Label>Make</Form.Label>
@@ -37,7 +37,22 @@ const AddPrimerTemplate = () => {
 
                     <Form.Group className="mb-1">
                         <Form.Label>Size</Form.Label>
-                        <Form.Control required type="string" name="model" placeholder="Enter size" />
+                        <Form.Control required type="number" name="size" defaultValue="0" placeholder="Enter size" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Date Purchased</Form.Label>
+                        <Form.Control required type="string" name="datePurchased" placeholder="Enter date purchased" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Initial Count</Form.Label>
+                        <Form.Control required type="number" name="initialCount" defaultValue="0" placeholder="Enter initial count" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-1">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control required type="number" name="price" defaultValue="0" placeholder="Enter the price" />
                     </Form.Group>
 
                     <Button variant="primary" type="submit" >
@@ -49,4 +64,4 @@ const AddPrimerTemplate = () => {
     );
 }
 
-export default AddPrimerTemplate;
+export default AddPrimer;
