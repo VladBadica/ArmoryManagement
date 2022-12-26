@@ -4,7 +4,7 @@ import { Button, Accordion, Card } from 'react-bootstrap';
 import CasingService from '../../services/casingService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewCasing = () => {
+const ViewCasings = () => {
     const [showDeleteCasingModal, setShowDeleteCasingModal] = useState(false);
     const [selectedCasingForDelete, setSelectedCasingForDelete] = useState(null);
     const [casings, setCasings] = useState([]);
@@ -45,8 +45,8 @@ const ViewCasing = () => {
                 <Accordion.Body>
                     <div className="row">
                         <div className="col-6">
-                            Make: {make} <br />
                             Calibre: {calibre}<br />
+                            Make: {make} <br />
                             Model: {model}<br />
                             Grain: {grain}<br />
                             DatePurchased: {datePurchased}<br />
@@ -92,4 +92,4 @@ const ViewCasing = () => {
     );
 }
 
-export default ViewCasing;
+export default ViewCasings;

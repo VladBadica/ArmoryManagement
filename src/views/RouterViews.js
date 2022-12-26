@@ -10,6 +10,7 @@ import AddTemplates from './AddTemplates';
 import NoMatch from './NoMatch';
 import routes from '../constants/routes';
 import AddMaterials from './AddMaterials.js';
+import Reload from './Reload.js';
 
 const ReactRouterSetup = () => {
     return (
@@ -22,6 +23,7 @@ const ReactRouterSetup = () => {
                     <Route path={routes.Home} element={<Home />} />
                     <Route path={routes.AddTemplates} element={<AddTemplates />} />
                     <Route path={routes.AddMaterials} element={<AddMaterials />} />
+                    <Route path={routes.Reloads} element={<Reload />} />
                     <Route path={routes.ViewAmmunitions} element={<ViewAmmunitions />} />
                     <Route path={routes.NoMatch} element={<NoMatch />} />
                 </Route>
