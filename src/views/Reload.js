@@ -10,7 +10,6 @@ const Reload = () => {
     const [casings, setCasings] = useState([]);
     const [powders, setPowders] = useState([]);
     const [primers, setPrimers] = useState([]);
-    const [reloads, setReloads] = useState([]);
     const [selectedCasing, setSelectedCasing] = useState(null);
     const [selectedPowder, setSelectedPowder] = useState(null);
     const [selectedPrimer, setSelectedPrimer] = useState(null);
@@ -42,14 +41,6 @@ const Reload = () => {
         }
     }, []);
 
-    const getAllReloads = useCallback(async () => {
-        const response = await ReloadService.GetAllReloads();
-
-        if (!response.error) {
-            setReloads(response.data);
-        }
-    }, []);
-
     const getMaterials = useCallback(async () => {
         await getAllCasings();
         await getAllPowders();
@@ -73,8 +64,7 @@ const Reload = () => {
 
     useEffect(() => {
         getMaterials();
-        getAllReloads();
-    }, [getMaterials, getAllReloads]);
+    }, [getMaterials]);
 
     const renderCasingsList = useMemo(() => {
         if (casings.length <= 0) {
@@ -292,16 +282,18 @@ const Reload = () => {
                 </Col>
             </Row>
 
-            <Row>
-                < ViewReloads>
-                </ViewReloads>
-            </Row>
-            <Row>
+            <Row className="mt-4">
                 <Col md={{ offset: 5, span: 2 }}>
                     <Button className="w-100" variant="primary" onClick={addReload}> Reload </Button>
                 </Col>
             </Row>
 
+            <Row className="mt-4">
+                <Col md={{ offset: 3, span: 6 }} >
+                    < ViewReloads>
+                    </ViewReloads>
+                </Col>
+            </Row>
         </div>
     );
 }

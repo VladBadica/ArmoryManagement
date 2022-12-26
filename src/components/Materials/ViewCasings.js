@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import routes from '../../constants/routes';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Button, Accordion, Card, Row, Col } from 'react-bootstrap';
 import CasingService from '../../services/casingService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewCasings = () => {
+const ViewCasings = ({ showDelete, showAddButton }) => {
     const [showDeleteCasingModal, setShowDeleteCasingModal] = useState(false);
     const [selectedCasingForDelete, setSelectedCasingForDelete] = useState(null);
     const [casings, setCasings] = useState([]);
@@ -43,8 +45,8 @@ const ViewCasings = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {calibre} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
+                    <Row>
+                        <Col>
                             Calibre: {calibre}<br />
                             Make: {make} <br />
                             Model: {model}<br />
@@ -53,19 +55,23 @@ const ViewCasings = () => {
                             Price: {price}<br />
                             InitialCount: {initialCount}<br />
                             Remaining: {remaining}<br />
-                        </div>
-                        <div className="col-6 text-end">
-                            <Button
-                                variant="danger"
-                                onClick={() => { setShowDeleteCasingModal(true); setSelectedCasingForDelete(id) }}>
-                                Delete
-                            </Button>
-                        </div>
-                    </div>
+                        </Col>
+
+                        {showDelete ?
+                            <Col md={6} className="text-end">
+                                <Button
+                                    variant="danger"
+                                    onClick={() => { setShowDeleteCasingModal(true); setSelectedCasingForDelete(id) }}>
+                                    Delete
+                                </Button>
+                            </Col> :
+                            <></>
+                        }
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
-    }, [casings, setShowDeleteCasingModal])
+    }, [casings, setShowDeleteCasingModal, showDelete])
 
     const renderConfirmDelete = useMemo(() => (
         <ConfirmationModal
@@ -80,8 +86,20 @@ const ViewCasings = () => {
 
     return (
         <>
-            <div >
-                <h3 className="mb-3"> Casings</h3>
+            <div>
+                <Row className="mb-3">
+                    <Col>
+                        <h3> Casings</h3>
+                    </Col>
+                    {
+                        showAddButton ?
+                            <Col className="text-end">
+                                <Link to={routes.AddMaterials}> <Button variant="secondary" className="mt-0">Add Casings </Button> </Link>
+                            </Col> :
+                            <></>
+                    }
+                </Row>
+
                 <Accordion defaultActiveKey="0" >
                     {renderCasings}
                 </Accordion>

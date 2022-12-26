@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import PowderService from '../../services/powderService.js';
 import ViewPowders from './ViewPowders';
 
@@ -12,17 +12,12 @@ const AddPowder = () => {
     }
 
     return (
-        <div className="mt-4 mb-4 row me-0">
-            <div className="col-1">
-            </div>
-            <div className="col-5">
-                <ViewPowders></ViewPowders>
-            </div>
+        <Row className="mt-4 mb-4 me-0">
+            <Col md={{ offset: 1, span: 5 }}>
+                <ViewPowders showDelete={true}></ViewPowders>
+            </Col>
 
-            <div className="col-1">
-            </div>
-
-            <div className="col-4">
+            <Col md={{ offset: 1, span: 4 }}>
                 <h3 className="mb-3"> Add Powder </h3>
                 <Form onSubmit={(e) => handleAddPowder(e)}>
                     <Form.Group className="mb-1">
@@ -54,8 +49,8 @@ const AddPowder = () => {
                         Submit
                     </Button>
                 </Form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 }
 

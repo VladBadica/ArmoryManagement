@@ -1,15 +1,35 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-import { Link } from 'react-router-dom';
-import routes from '../constants/routes';
+import { Row, Col } from 'react-bootstrap';
+import ViewCasings from '../components/Materials/ViewCasings';
+import ViewPowders from '../components/Materials/ViewPowders';
+import ViewPrimers from '../components/Materials/ViewPrimers';
+import ViewReloads from '../components/ViewReloads';
 
 const Home = () => {
     return (
-        <div className="text-center">
-            <h1 className="mb-5"> Armory Manager</h1>
-            <Link to={routes.AddTemplates}> <Button variant="secondary">Add Templates </Button> </Link>
-            <Link to={routes.AddMaterials}> <Button variant="secondary">Add Materials </Button> </Link>
-        </div>
+        <>
+            <Row className="text-center">
+                <h1 className="mb-5"> Armory Manager</h1>
+            </Row>
+            <Row>
+                <Col md={{ offset: 3, span: 2 }}>
+                    <ViewCasings showAddButton={true}></ViewCasings>
+                </Col>
+                <Col md={2}>
+                    <ViewPowders showAddButton={true}></ViewPowders>
+                </Col>
+                <Col md={2}>
+                    <ViewPrimers showAddButton={true}></ViewPrimers>
+                </Col>
+
+            </Row>
+
+            <Row className="mt-4">
+                <Col md={{ offset: 3, span: 6 }}>
+                    <ViewReloads></ViewReloads>
+                </Col>
+            </Row>
+        </>
     )
 };
 

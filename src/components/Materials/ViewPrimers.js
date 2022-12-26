@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import routes from '../../constants/routes';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Button, Accordion, Card, Row, Col } from 'react-bootstrap';
 import PrimerService from '../../services/primerService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewPrimers = () => {
+const ViewPrimers = ({ showDelete, showAddButton }) => {
     const [showDeletePrimerModal, setShowDeletePrimerModal] = useState(false);
     const [selectedPrimerForDelete, setSelectedPrimerForDelete] = useState(null);
     const [primers, setPrimers] = useState([]);
@@ -43,8 +45,8 @@ const ViewPrimers = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {model} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
+                    <Row>
+                        <Col>
                             Make: {make} <br />
                             Model: {model}<br />
                             Size: {size}<br />
@@ -52,19 +54,22 @@ const ViewPrimers = () => {
                             Price: {price}<br />
                             InitialCount: {initialCount}<br />
                             Remaining: {remaining}<br />
-                        </div>
-                        <div className="col-6 text-end">
-                            <Button
-                                variant="danger"
-                                onClick={() => { setShowDeletePrimerModal(true); setSelectedPrimerForDelete(id) }}>
-                                Delete
-                            </Button>
-                        </div>
-                    </div>
+                        </Col>
+                        {showDelete ?
+                            <Col md={6} className="text-end">
+                                <Button
+                                    variant="danger"
+                                    onClick={() => { setShowDeletePrimerModal(true); setSelectedPrimerForDelete(id) }}>
+                                    Delete
+                                </Button>
+                            </Col> :
+                            <></>
+                        }
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
-    }, [primers, setShowDeletePrimerModal])
+    }, [primers, setShowDeletePrimerModal, showDelete])
 
     const renderConfirmDelete = useMemo(() => (
         <ConfirmationModal
@@ -80,7 +85,18 @@ const ViewPrimers = () => {
     return (
         <>
             <div >
-                <h3 className="mb-3"> Primers</h3>
+                <Row className="mb-3">
+                    <Col>
+                        <h3> Primers </h3>
+                    </Col>
+                    {
+                        showAddButton ?
+                            <Col className="text-end">
+                                <Link to={routes.AddMaterials}> <Button variant="secondary" className="mt-0">Add Primers </Button> </Link>
+                            </Col> :
+                            <></>
+                    }
+                </Row>
                 <Accordion defaultActiveKey="0" >
                     {renderPrimers}
                 </Accordion>

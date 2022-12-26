@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import CasingService from '../../services/casingService.js';
 import ViewCasings from './ViewCasings';
 
@@ -13,17 +13,12 @@ const AddCasing = () => {
     }
 
     return (
-        <div className="mt-4 mb-4 row me-0">
-            <div className="col-1">
-            </div>
-            <div className="col-5">
-                <ViewCasings></ViewCasings>
-            </div>
+        <Row className="mt-4 mb-4 me-0">
+            <Col md={{ offset: 1, span: 5 }}>
+                <ViewCasings showDelete={true}></ViewCasings>
+            </Col>
 
-            <div className="col-1">
-            </div>
-
-            <div className="col-4">
+            <Col md={{ offset: 1, span: 4 }}>
                 <h3 className="mb-3"> Add Casing </h3>
                 <Form onSubmit={(e) => handleAddCasing(e)}>
                     <Form.Group className="mb-1">
@@ -64,8 +59,8 @@ const AddCasing = () => {
                         Submit
                     </Button>
                 </Form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 }
 
