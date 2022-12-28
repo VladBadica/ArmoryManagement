@@ -1,9 +1,9 @@
 import React from 'react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Accordion, Card } from 'react-bootstrap';
+import { Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import ReloadService from '../services/reloadService.js';
 
-const ViewReloads = () => {
+const ViewReloads = ({ containerSize }) => {
     const [reloads, setReloads] = useState([]);
 
     const getAllReloads = useCallback(async () => {
@@ -19,7 +19,6 @@ const ViewReloads = () => {
     }, [getAllReloads]);
 
     const renderReloads = useMemo(() => {
-        console.log(reloads);
         if (reloads.length <= 0) {
             return <Card>
                 <Card.Body>NO RELOADS</Card.Body>
@@ -29,12 +28,16 @@ const ViewReloads = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {casing.calibre} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
-                            Casing Calibre: {casing.calibre}<br />
-                            Casing Count: {casingCount} <br />
-                        </div>
-                    </div>
+                    <Row>
+                        <Col>
+                            Casing Calibre: {casing.calibre}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            Casing Count: {casingCount}
+                        </Col>
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
@@ -44,9 +47,12 @@ const ViewReloads = () => {
         <>
             <div >
                 <h3 className="mb-3"> Reloads</h3>
-                <Accordion defaultActiveKey="0" >
-                    {renderReloads}
-                </Accordion>
+
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderReloads}
+                    </Accordion>
+                </Container>
             </div>
         </>
     );

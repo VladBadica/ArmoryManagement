@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../constants/routes';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card, Row, Col } from 'react-bootstrap';
+import { Button, Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import PowderService from '../../services/powderService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewPowders = ({ showDelete, showAddButton }) => {
+const ViewPowders = ({ showDelete, showAddButton, containerSize }) => {
     const [showDeletePowderModal, setShowDeletePowderModal] = useState(false);
     const [selectedPowderForDelete, setSelectedPowderForDelete] = useState(null);
     const [powders, setPowders] = useState([]);
@@ -94,9 +94,11 @@ const ViewPowders = ({ showDelete, showAddButton }) => {
                     }
                 </Row>
 
-                <Accordion defaultActiveKey="0" >
-                    {renderPowders}
-                </Accordion>
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderPowders}
+                    </Accordion>
+                </Container>
             </div>
 
             {renderConfirmDelete}

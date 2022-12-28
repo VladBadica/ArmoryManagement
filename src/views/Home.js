@@ -13,20 +13,20 @@ const Home = () => {
             </Row>
             <Row>
                 <Col md={{ offset: 3, span: 2 }}>
-                    <ViewCasings showAddButton={true}></ViewCasings>
+                    <ViewCasings showAddButton={true} containerSize={'sm'}></ViewCasings>
                 </Col>
                 <Col md={2}>
-                    <ViewPowders showAddButton={true}></ViewPowders>
+                    <ViewPowders showAddButton={true} containerSize={'sm'}></ViewPowders>
                 </Col>
                 <Col md={2}>
-                    <ViewPrimers showAddButton={true}></ViewPrimers>
+                    <ViewPrimers showAddButton={true} containerSize={'sm'}></ViewPrimers>
                 </Col>
 
             </Row>
 
             <Row className="mt-4">
                 <Col md={{ offset: 3, span: 6 }}>
-                    <ViewReloads></ViewReloads>
+                    <ViewReloads containerSize={'sm'}></ViewReloads>
                 </Col>
             </Row>
         </>

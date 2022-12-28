@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../constants/routes';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card, Row, Col } from 'react-bootstrap';
+import { Button, Accordion, Card, Row, Col, Container } from 'react-bootstrap';
 import CasingService from '../../services/casingService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewCasings = ({ showDelete, showAddButton }) => {
+const ViewCasings = ({ showDelete, showAddButton, containerSize }) => {
     const [showDeleteCasingModal, setShowDeleteCasingModal] = useState(false);
     const [selectedCasingForDelete, setSelectedCasingForDelete] = useState(null);
     const [casings, setCasings] = useState([]);
@@ -99,10 +99,12 @@ const ViewCasings = ({ showDelete, showAddButton }) => {
                             <></>
                     }
                 </Row>
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderCasings}
+                    </Accordion>
+                </Container>
 
-                <Accordion defaultActiveKey="0" >
-                    {renderCasings}
-                </Accordion>
             </div>
 
             {renderConfirmDelete}

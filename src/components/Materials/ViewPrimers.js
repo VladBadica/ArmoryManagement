@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import routes from '../../constants/routes';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card, Row, Col } from 'react-bootstrap';
+import { Button, Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import PrimerService from '../../services/primerService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewPrimers = ({ showDelete, showAddButton }) => {
+const ViewPrimers = ({ showDelete, showAddButton, containerSize }) => {
     const [showDeletePrimerModal, setShowDeletePrimerModal] = useState(false);
     const [selectedPrimerForDelete, setSelectedPrimerForDelete] = useState(null);
     const [primers, setPrimers] = useState([]);
@@ -97,9 +97,12 @@ const ViewPrimers = ({ showDelete, showAddButton }) => {
                             <></>
                     }
                 </Row>
-                <Accordion defaultActiveKey="0" >
-                    {renderPrimers}
-                </Accordion>
+
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderPrimers}
+                    </Accordion>
+                </Container>
             </div>
 
             {renderConfirmDelete}

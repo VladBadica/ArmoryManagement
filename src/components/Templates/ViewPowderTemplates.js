@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Button, Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import PowderTemplateService from '../../services/powderTemplateService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewPowderTemplates = () => {
+const ViewPowderTemplates = ({ containerSize }) => {
     const [showDeletePowderModal, setShowDeletePowderModal] = useState(false);
     const [selectedPowderForDelete, setSelectedPowderForDelete] = useState(null);
     const [powderTemplates, setPowderTemplates] = useState([]);
@@ -43,19 +43,19 @@ const ViewPowderTemplates = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {model} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
+                    <Row>
+                        <Col>
                             Make: {make} <br />
                             Model: {model}<br />
-                        </div>
-                        <div className="col-6 text-end">
+                        </Col>
+                        <Col className="text-end">
                             <Button
                                 variant="danger"
                                 onClick={() => { setShowDeletePowderModal(true); setSelectedPowderForDelete(id) }}>
                                 Delete
                             </Button>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
@@ -76,9 +76,12 @@ const ViewPowderTemplates = () => {
         <>
             <div >
                 <h3 className="mb-3"> Powder Templates</h3>
-                <Accordion defaultActiveKey="0" >
-                    {renderPowderTemplates}
-                </Accordion>
+
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderPowderTemplates}
+                    </Accordion>
+                </Container>
             </div>
 
             {renderConfirmDelete}

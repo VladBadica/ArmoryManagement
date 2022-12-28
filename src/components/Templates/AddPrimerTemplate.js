@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Row, Col } from 'react-bootstrap';
 import PrimerTemplateService from '../../services/primerTemplateService.js';
 import ViewPrimerTemplates from './ViewPrimerTemplates';
 
@@ -12,17 +12,12 @@ const AddPrimerTemplate = () => {
     }
 
     return (
-        <div className="mt-4 mb-4 row me-0">
-            <div className="col-1">
-            </div>
-            <div className="col-5">
+        <Row className="mt-4 mb-4 me-0">
+            <Col md={{ offset: 1, span: 5 }}>
                 <ViewPrimerTemplates></ViewPrimerTemplates>
-            </div>
+            </Col>
 
-            <div className="col-1">
-            </div>
-
-            <div className="col-4">
+            <Col md={{ offset: 1, span: 4 }} >
                 <h3 className="mb-3"> Add Primer Template</h3>
                 <Form onSubmit={(e) => handleAddPrimer(e)}>
                     <Form.Group className="mb-1">
@@ -44,8 +39,8 @@ const AddPrimerTemplate = () => {
                         Submit
                     </Button>
                 </Form>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 }
 

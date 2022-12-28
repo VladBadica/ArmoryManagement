@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Button, Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import CasingTemplateService from '../../services/casingTemplateService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewCasingTemplates = () => {
+const ViewCasingTemplates = ({ containerSize }) => {
     const [showDeleteCasingModal, setShowDeleteCasingModal] = useState(false);
     const [selectedCasingForDelete, setSelectedCasingForDelete] = useState(null);
     const [casingTemplates, setCasingTemplates] = useState([]);
@@ -43,21 +43,21 @@ const ViewCasingTemplates = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {calibre} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
+                    <Row>
+                        <Col>
                             Make: {make} <br />
                             Calibre: {calibre}<br />
                             Model: {model}<br />
                             Grain: {grain}
-                        </div>
-                        <div className="col-6 text-end">
+                        </Col>
+                        <Col className="text-end">
                             <Button
                                 variant="danger"
                                 onClick={() => { setShowDeleteCasingModal(true); setSelectedCasingForDelete(id) }}>
                                 Delete
                             </Button>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
@@ -78,9 +78,12 @@ const ViewCasingTemplates = () => {
         <>
             <div >
                 <h3 className="mb-3"> Casing Templates</h3>
-                <Accordion defaultActiveKey="0" >
-                    {renderCasingTemplates}
-                </Accordion>
+
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderCasingTemplates}
+                    </Accordion>
+                </Container>
             </div>
 
             {renderConfirmDelete}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useEffect, useState, useCallback, useMemo } from 'react';
-import { Button, Accordion, Card } from 'react-bootstrap';
+import { Button, Accordion, Card, Container, Row, Col } from 'react-bootstrap';
 import PrimerTemplateService from '../../services/primerTemplateService.js';
 import ConfirmationModal from '../ConfirmationModal';
 
-const ViewPrimerTemplates = () => {
+const ViewPrimerTemplates = ({ containerSize }) => {
     const [showDeletePrimerModal, setShowDeletePrimerModal] = useState(false);
     const [selectedPrimerForDelete, setSelectedPrimerForDelete] = useState(null);
     const [primerTemplates, setPrimerTemplates] = useState([]);
@@ -43,20 +43,20 @@ const ViewPrimerTemplates = () => {
             <Accordion.Item eventKey={id} key={id} >
                 <Accordion.Header> {model} </Accordion.Header>
                 <Accordion.Body>
-                    <div className="row">
-                        <div className="col-6">
+                    <Row className="row">
+                        <Col>
                             Make: {make} <br />
                             Model: {model}<br />
                             Size: {size}<br />
-                        </div>
-                        <div className="col-6 text-end">
+                        </Col>
+                        <Col className="text-end">
                             <Button
                                 variant="danger"
                                 onClick={() => { setShowDeletePrimerModal(true); setSelectedPrimerForDelete(id) }}>
                                 Delete
                             </Button>
-                        </div>
-                    </div>
+                        </Col>
+                    </Row>
                 </Accordion.Body>
             </Accordion.Item >
         )
@@ -77,9 +77,12 @@ const ViewPrimerTemplates = () => {
         <>
             <div >
                 <h3 className="mb-3"> Primer Templates</h3>
-                <Accordion defaultActiveKey="0" >
-                    {renderPrimerTemplates}
-                </Accordion>
+
+                <Container className={`overflow-container${containerSize ? "-" + containerSize : ""}`}>
+                    <Accordion defaultActiveKey="0" className="overflow-container-content">
+                        {renderPrimerTemplates}
+                    </Accordion>
+                </Container>
             </div>
 
             {renderConfirmDelete}
